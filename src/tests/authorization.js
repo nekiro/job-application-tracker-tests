@@ -4,7 +4,7 @@ const { getToken } = require('../util/token');
 let token;
 
 beforeAll(async () => {
-  token = `Bearer ${(await getToken())}`;
+  token = `Bearer ${await getToken()}`;
 });
 
 describe('Authorization', () => {
@@ -40,7 +40,9 @@ describe('Authorization', () => {
 
   describe('given malformed token', () => {
     test('should return json error', async () => {
-      const res = await request.get('/users').set('Authorization', `Bearer ${}`);
+      const res = await request
+        .get('/users')
+        .set('Authorization', `Bearer foobar123`);
 
       expect(res.status).toBe(401);
       expect(res.body.errorType).toBe('JsonWebTokenError');
