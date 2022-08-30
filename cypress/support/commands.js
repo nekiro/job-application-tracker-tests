@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('fillInputs', (inputsMap) => {
+  inputsMap.forEach(({ input, value }) => {
+    cy.get(input).type(value);
+  });
+});

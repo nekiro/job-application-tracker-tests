@@ -6,6 +6,14 @@ after(() => {
   cy.visit('/sign-in');
 });
 
+const generateAllUtf8Str = () => {
+  let str = '';
+  for (let i = 0x7f; i < 0xbf; i++) {
+    str += String.fromCharCode(i);
+  }
+  return str;
+};
+
 describe('sign-in', () => {
   it('should render the page', () => {
     cy.url()
@@ -21,10 +29,21 @@ describe('sign-in', () => {
   });
 
   it('should return verification error', () => {
-    cy.get('#email')
-      .type('foo')
-      .get('#password')
-      .type('bar')
+    cy.fillInputs([
+      { input: '#email', value: 'foo' },
+      { input: '#password', value: 'bar' },
+    ])
+      .get('.chakra-button')
+      .click()
+      .get('[id$=-feedback]')
+      .should('be.visible');
+  });
+
+  it('should return verification error', () => {
+    cy.fillInputs([
+      { input: '#email', value: generateAllUtf8Str() },
+      { input: '#password', value: generateAllUtf8Str() },
+    ])
       .get('.chakra-button')
       .click()
       .get('[id$=-feedback]')
@@ -32,10 +51,10 @@ describe('sign-in', () => {
   });
 
   it('should redirect to panel', () => {
-    cy.get('#email')
-      .type(Cypress.env('USER_EMAIL'))
-      .get('#password')
-      .type(Cypress.env('USER_PASSWORD'))
+    cy.fillInputs([
+      { input: '#email', value: Cypress.env('USER_EMAIL') },
+      { input: '#password', value: Cypress.env('USER_PASSWORD') },
+    ])
       .get('.chakra-button')
       .click()
       .url()
