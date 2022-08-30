@@ -1,3 +1,7 @@
 # job-application-tracker-tests
 
-Integration and E2E tests for https://jobtracker.pl.
+Tests for https://jobtracker.pl.
+
+Integration tests using Jest.
+E2E tests using cypress.
+Load tests using K6.
