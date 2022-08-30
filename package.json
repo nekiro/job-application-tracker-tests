@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "jest"
+    "integration": "jest",
+    "e2e": "cypress run",
+    "cypress": "cypress open"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 const request = require('supertest')(process.env.API_URL);
-const { getToken } = require('../util/token');
+const { getToken } = require('../../util/token');
 
 let token;
 

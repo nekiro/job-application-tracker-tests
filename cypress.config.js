@@ -7,7 +7,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     baseUrl: process.env.CYPRESS_E2E_DOMAIN,
-    specPattern: 'src/tests/e2e/**/*.cy.{js,jsx,ts,tsx}',
+    specPattern: 'tests/e2e/**/*.cy.{js,jsx,ts,tsx}',
     env: Object.entries(process.env).reduce((prevValue, [key, value]) => {
       return {
         ...prevValue,
